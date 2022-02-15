@@ -63,9 +63,7 @@ public class Game
 
         void NormalTurn()
         {
-            _places[_currentPlayer] = _places[_currentPlayer] + roll;
-            if (_places[_currentPlayer] > 11)
-                _places[_currentPlayer] = _places[_currentPlayer] - 12;
+            _places[_currentPlayer] = GetNextPosition(_places[_currentPlayer], roll);
 
             Console.WriteLine($"{_players[_currentPlayer]}'s new location is {_places[_currentPlayer]}");
             Console.WriteLine($"The category is {CurrentCategory()}");
@@ -92,6 +90,14 @@ public class Game
                 _isGettingOutOfPenaltyBox = false;
             }
         }
+    }
+
+    private int GetNextPosition(int current, int roll)
+    {
+        var sum = current + roll;
+        if (sum > 11)
+            return sum - 12;
+        return sum;
     }
 
     private void AskQuestion()
