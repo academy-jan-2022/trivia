@@ -62,35 +62,46 @@ public class Game {
         System.out.println("They have rolled a " + roll);
 
         if (inPenaltyBox[currentPlayer]) {
-            if (roll % 2 != 0) {
-                isGettingOutOfPenaltyBox = true;
-
-                System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
-                places[currentPlayer] = places[currentPlayer] + roll;
-                if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
-
-                System.out.println(players.get(currentPlayer)
-                        + "'s new location is "
-                        + places[currentPlayer]);
-                System.out.println("The category is " + currentCategory());
-                askQuestion();
-            } else {
-                System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
-                isGettingOutOfPenaltyBox = false;
-            }
+            penaltyBoxTurn(roll);
 
         } else {
 
-            places[currentPlayer] = places[currentPlayer] + roll;
-            if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
+            regularTurn(roll);
+        }
+
+    }
+
+    private void penaltyBoxTurn(int roll) {
+        if (roll % 2 != 0) {
+            isGettingOutOfPenaltyBox = true;
+
+            System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
+            setPlayerPlace(roll);
 
             System.out.println(players.get(currentPlayer)
                     + "'s new location is "
                     + places[currentPlayer]);
             System.out.println("The category is " + currentCategory());
             askQuestion();
+        } else {
+            System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
+            isGettingOutOfPenaltyBox = false;
         }
+    }
 
+    private void setPlayerPlace(int roll) {
+        places[currentPlayer] = places[currentPlayer] + roll;
+        if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
+    }
+
+    private void regularTurn(int roll) {
+        setPlayerPlace(roll);
+
+        System.out.println(players.get(currentPlayer)
+                + "'s new location is "
+                + places[currentPlayer]);
+        System.out.println("The category is " + currentCategory());
+        askQuestion();
     }
 
     private void askQuestion() {
