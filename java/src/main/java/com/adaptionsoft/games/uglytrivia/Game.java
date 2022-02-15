@@ -72,7 +72,8 @@ public class Game {
     }
 
     private void penaltyBoxTurn(int roll) {
-        if (roll % 2 != 0) {
+        boolean shouldGetOutOfPenaltyBox = roll % 2 != 0;
+        if (shouldGetOutOfPenaltyBox) {
             isGettingOutOfPenaltyBox = true;
 
             System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
@@ -100,6 +101,7 @@ public class Game {
     }
 
     private void askQuestion() {
+
         if (currentCategory().equals(Category.Pop))
             System.out.println(popQuestions.removeFirst());
         if (currentCategory().equals(Category.Science))
@@ -112,16 +114,31 @@ public class Game {
 
 
     private Category currentCategory() {
-        if (places[currentPlayer] == 0) return Category.Pop;
-        if (places[currentPlayer] == 4) return Category.Pop;
-        if (places[currentPlayer] == 8) return Category.Pop;
-        if (places[currentPlayer] == 1) return Category.Science;
-        if (places[currentPlayer] == 5) return Category.Science;
-        if (places[currentPlayer] == 9) return Category.Science;
-        if (places[currentPlayer] == 2) return Category.Sports;
-        if (places[currentPlayer] == 6) return Category.Sports;
-        if (places[currentPlayer] == 10) return Category.Sports;
+        if (isPopCategory()){
+            return Category.Pop;
+        }
+
+        if (isScienceCategory()){
+            return Category.Science;
+        }
+
+        if (isSportsCategory()){
+            return Category.Sports;
+        }
+
         return Category.Rock;
+    }
+
+    private boolean isPopCategory() {
+        return places[currentPlayer] == 0 || places[currentPlayer] == 4 || places[currentPlayer] == 8;
+    }
+
+    private boolean isScienceCategory() {
+        return places[currentPlayer] == 1 || places[currentPlayer] == 5 || places[currentPlayer] == 9;
+    }
+
+    private boolean isSportsCategory() {
+        return places[currentPlayer] == 2 || places[currentPlayer] == 6 || places[currentPlayer] == 10;
     }
 
     public boolean wasCorrectlyAnswered() {
