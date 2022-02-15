@@ -37,7 +37,7 @@ public class Game
     public bool IsPlayable() =>
         HowManyPlayers() >= 2;
 
-    public bool Add(string playerName)
+    public void Add(string playerName)
     {
         _players.Add(playerName);
         _places[HowManyPlayers()] = 0;
@@ -46,7 +46,6 @@ public class Game
 
         Console.WriteLine($"{playerName} was added");
         Console.WriteLine($"They are player number {_players.Count}");
-        return true;
     }
 
     public int HowManyPlayers() =>
