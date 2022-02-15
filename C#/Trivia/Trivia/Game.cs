@@ -4,21 +4,40 @@ using System.Linq;
 
 namespace Trivia;
 
+public class Player
+{
+    public Player(string name) =>
+        Name = name;
+
+    public string Name { get; }
+    public PenaltyBoxState PenaltyBoxState { get; set; }
+    public int Purse { get; set; }
+    public int Place { get; set; }
+}
+
+public enum PenaltyBoxState
+{
+    In,
+    Out,
+    Leaving
+}
+
 public class Game
 {
     private readonly bool[] _inPenaltyBox = new bool[6];
-
+    private readonly int[] _purses = new int[6];
     private readonly int[] _places = new int[6];
+    private bool _isGettingOutOfPenaltyBox;
+    private int _currentPlayer;
+
+    private readonly List<Player> players = new();
     private readonly List<string> _players = new();
 
     private readonly LinkedList<string> _popQuestions = new();
-    private readonly int[] _purses = new int[6];
     private readonly LinkedList<string> _rockQuestions = new();
     private readonly LinkedList<string> _scienceQuestions = new();
     private readonly LinkedList<string> _sportsQuestions = new();
 
-    private int _currentPlayer;
-    private bool _isGettingOutOfPenaltyBox;
 
     public Game()
     {
@@ -39,13 +58,14 @@ public class Game
 
     public void Add(string playerName)
     {
+        players.Add(new Player(playerName));
         _players.Add(playerName);
         _places[HowManyPlayers()] = 0;
         _purses[HowManyPlayers()] = 0;
         _inPenaltyBox[HowManyPlayers()] = false;
 
         Console.WriteLine($"{playerName} was added");
-        Console.WriteLine($"They are player number {_players.Count}");
+        Console.WriteLine($"They are player number {players.Count}");
     }
 
     public int HowManyPlayers() =>
