@@ -31,9 +31,9 @@ public class SnapshotTest
         {
             aGame.Roll(roll);
             if (isCorrect)
-                aGame.WasCorrectlyAnswered();
+                aGame.GiveCorrectAnswer();
             else
-                aGame.WrongAnswer();
+                aGame.GiveWrongAnswer();
         }
         Assert.Equal(snapshot, stringWriter.ToString());
     }

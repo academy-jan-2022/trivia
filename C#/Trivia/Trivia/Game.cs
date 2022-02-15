@@ -138,7 +138,7 @@ public class Game
         return Category.Rock;
     }
 
-    public bool WasCorrectlyAnswered()
+    public bool GiveCorrectAnswer()
     {
         if (_inPenaltyBox[_currentPlayer])
         {
@@ -149,14 +149,12 @@ public class Game
                 Console.WriteLine($"{_players[_currentPlayer]} now has {_purses[_currentPlayer]} Gold Coins.");
 
                 var winner = DidPlayerWin();
-                _currentPlayer++;
-                if (_currentPlayer == _players.Count) _currentPlayer = 0;
+                SetNextPlayer();
 
                 return winner;
             }
 
-            _currentPlayer++;
-            if (_currentPlayer == _players.Count) _currentPlayer = 0;
+            SetNextPlayer();
             return true;
         }
 
@@ -166,21 +164,22 @@ public class Game
             Console.WriteLine($"{_players[_currentPlayer]} now has {_purses[_currentPlayer]} Gold Coins.");
 
             var winner = DidPlayerWin();
-            _currentPlayer++;
-            if (_currentPlayer == _players.Count) _currentPlayer = 0;
+            SetNextPlayer();
 
             return winner;
         }
     }
 
-    public bool WrongAnswer()
+    private void SetNextPlayer() =>
+        _currentPlayer = (_currentPlayer + 1) % _players.Count;
+
+    public bool GiveWrongAnswer()
     {
         Console.WriteLine("Question was incorrectly answered");
         Console.WriteLine($"{_players[_currentPlayer]} was sent to the penalty box");
         _inPenaltyBox[_currentPlayer] = true;
 
-        _currentPlayer++;
-        if (_currentPlayer == _players.Count) _currentPlayer = 0;
+        SetNextPlayer();
         return true;
     }
 

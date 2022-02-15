@@ -27,11 +27,11 @@ namespace Trivia
                 var isFail = rand.Next(2) == 1;
                 if (isFail)
                 {
-                    _notAWinner = aGame.WrongAnswer();
+                    _notAWinner = aGame.GiveWrongAnswer();
                 }
                 else
                 {
-                    _notAWinner = aGame.WasCorrectlyAnswered();
+                    _notAWinner = aGame.GiveCorrectAnswer();
                 }
                 plays.Add($"{roll},{!isFail}");
             } while (_notAWinner);
