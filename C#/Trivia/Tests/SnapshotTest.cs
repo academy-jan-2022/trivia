@@ -27,26 +27,12 @@ public class SnapshotTest
         aGame.Add("Sue");
 
         var playLines = File.ReadAllLines("./Snapshots/0/plays.csv");
-        var plays = new List<Play>
+        var plays = new List<Play>();
+        foreach (var playLine in playLines)
         {
-            new(3, true),
-            new(3, true),
-            new(3, true),
-            new(3, true),
-            new(4, true),
-            new(2, true),
-            new(4, true),
-            new(5, true),
-            new(4, true),
-            new(5, true),
-            new(1, true),
-            new(5, true),
-            new(2, false),
-            new(3, true),
-            new(5, true),
-            new(2, true),
-            new(4, true),
-        };
+            var parts = playLine.Split(",");
+            plays.Add(new Play(int.Parse(parts[0]), bool.Parse(parts[1])));
+        }
 
         foreach (var (roll, isCorrect) in plays)
         {
