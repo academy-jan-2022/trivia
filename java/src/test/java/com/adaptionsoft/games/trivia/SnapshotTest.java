@@ -20,8 +20,11 @@ class SnapshotTest {
     @Test
     void
     should_match_snapshot() throws IOException {
-        Path path = Paths.get("src/test/snapshots/0/output.txt");
-        var snapshot = String.join(System.lineSeparator(), Files.readAllLines(path));
+        Path snapshotPath = Paths.get("src/test/snapshots/0/output.txt");
+        var snapshot = String.join(System.lineSeparator(), Files.readAllLines(snapshotPath));
+
+        Path inputPath = Paths.get("src/test/snapshots/0/input.csv");
+        var inputs = Files.readAllLines(inputPath);
 
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
 
@@ -33,31 +36,17 @@ class SnapshotTest {
         aGame.add("Pat");
         aGame.add("Sue");
 
+        List<Play> plays = new java.util.ArrayList<>(List.of());
 
-        List<Play> plays = List.of(
-                new Play(5,true),
-                new Play(5,true),
-                new Play(1,true),
-                new Play(1,true),
-                new Play(4,true),
-                new Play(3,true),
-                new Play(1,true),
-                new Play(5,true),
-                new Play(3,false),
-                new Play(3,true),
-                new Play(4,true),
-                new Play(2,true),
-                new Play(4,true),
-                new Play(2,true),
-                new Play(4,true),
-                new Play(2,true)
-        );
+        for (String input: inputs) {
+            var play = input.split(",");
+            plays.add(
+                    new Play(Integer.parseInt(play[0]), Boolean.parseBoolean(play[1]))
+            );
+        }
 
         for (Play play: plays) {
             aGame.roll(play.roll());
-
-
-
             if(play.isCorrect){
                 aGame.wasCorrectlyAnswered();
             }else{
