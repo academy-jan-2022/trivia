@@ -54,10 +54,26 @@ public class Game
 
     public void Roll(int roll)
     {
-        Console.WriteLine(_players[_currentPlayer] + " is the current player");
-        Console.WriteLine("They have rolled a " + roll);
+        Console.WriteLine($"{_players[_currentPlayer]} is the current player");
+        Console.WriteLine($"They have rolled a {roll}");
 
         if (_inPenaltyBox[_currentPlayer])
+            PenaltyBoxTurn();
+        else
+            NormalTurn();
+
+        void NormalTurn()
+        {
+            _places[_currentPlayer] = _places[_currentPlayer] + roll;
+            if (_places[_currentPlayer] > 11)
+                _places[_currentPlayer] = _places[_currentPlayer] - 12;
+
+            Console.WriteLine($"{_players[_currentPlayer]}'s new location is {_places[_currentPlayer]}");
+            Console.WriteLine($"The category is {CurrentCategory()}");
+            AskQuestion();
+        }
+
+        void PenaltyBoxTurn()
         {
             if (roll % 2 != 0)
             {
@@ -78,21 +94,6 @@ public class Game
                 Console.WriteLine(_players[_currentPlayer] + " is not getting out of the penalty box");
                 _isGettingOutOfPenaltyBox = false;
             }
-        }
-        else
-        {
-            NormalTurn();
-        }
-
-        void NormalTurn()
-        {
-            _places[_currentPlayer] = _places[_currentPlayer] + roll;
-            if (_places[_currentPlayer] > 11)
-                _places[_currentPlayer] = _places[_currentPlayer] - 12;
-
-            Console.WriteLine($"{_players[_currentPlayer]}'s new location is {_places[_currentPlayer]}");
-            Console.WriteLine($"The category is {CurrentCategory()}");
-            AskQuestion();
         }
     }
 
