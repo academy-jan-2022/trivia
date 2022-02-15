@@ -44,7 +44,7 @@ public class GameRunner {
 		} while (notAWinner);
 
 		for(Play play: plays){
-			System.out.println("new Play("+play.roll()+","+play.isCorrect()+"),");
+			System.out.println(play.roll()+","+play.isCorrect());
 		}
 	}
 
