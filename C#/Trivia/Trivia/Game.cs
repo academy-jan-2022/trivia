@@ -129,15 +129,12 @@ public class Game
 
     private Category CurrentCategory()
     {
-        if (_places[_currentPlayer] == 0) return Category.Pop;
-        if (_places[_currentPlayer] == 4) return Category.Pop;
-        if (_places[_currentPlayer] == 8) return Category.Pop;
-        if (_places[_currentPlayer] == 1) return Category.Science;
-        if (_places[_currentPlayer] == 5) return Category.Science;
-        if (_places[_currentPlayer] == 9) return Category.Science;
-        if (_places[_currentPlayer] == 2) return Category.Sports;
-        if (_places[_currentPlayer] == 6) return Category.Sports;
-        if (_places[_currentPlayer] == 10) return Category.Sports;
+        if (_places[_currentPlayer] is 0 or 4 or 8)
+            return Category.Pop;
+        if (_places[_currentPlayer] is 1 or 5 or 9)
+            return Category.Science;
+        if (_places[_currentPlayer] is 2 or 6 or 10)
+            return Category.Sports;
         return Category.Rock;
     }
 
