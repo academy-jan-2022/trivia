@@ -11,6 +11,10 @@ public class SnapshotTest
     [Theory(DisplayName = "produces the same output")]
     [InlineData(0)]
     [InlineData(1)]
+    [InlineData(2)]
+    [InlineData(3)]
+    [InlineData(4)]
+    [InlineData(5)]
     public void Test1(int index)
     {
         using var stringWriter = new StringWriter();

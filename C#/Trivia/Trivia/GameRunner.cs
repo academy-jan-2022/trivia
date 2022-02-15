@@ -24,7 +24,7 @@ namespace Trivia
                 var roll = rand.Next(5) + 1;
                 aGame.Roll(roll);
 
-                var isFail = rand.Next(9) == 7;
+                var isFail = rand.Next(2) == 1;
                 if (isFail)
                 {
                     _notAWinner = aGame.WrongAnswer();
