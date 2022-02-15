@@ -87,7 +87,7 @@ public class Game
             Console.WriteLine(_players[_currentPlayer]
                               + "'s new location is "
                               + _places[_currentPlayer]);
-            Console.WriteLine("The category is " + CurrentCategory());
+            Console.WriteLine($"The category is {CurrentCategory()}");
             AskQuestion();
         }
     }
