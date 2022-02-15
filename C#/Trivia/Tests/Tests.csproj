@@ -22,4 +22,13 @@
     <ProjectReference Include="..\Trivia\Trivia.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Snapshots\0\output.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Snapshots\0\plays.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
