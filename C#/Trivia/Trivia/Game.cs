@@ -25,7 +25,6 @@ public enum PenaltyBoxState
 public class Game
 {
     private readonly bool[] _inPenaltyBox = new bool[6];
-    private readonly int[] _places = new int[6];
     private bool _isGettingOutOfPenaltyBox;
     private int _currentPlayer;
 
@@ -61,7 +60,6 @@ public class Game
     {
         players.Add(new Player(playerName));
         _players.Add(playerName);
-        _places[HowManyPlayers()] = 0;
         _inPenaltyBox[HowManyPlayers()] = false;
 
         Console.WriteLine($"{playerName} was added");
@@ -83,9 +81,9 @@ public class Game
 
         void NormalTurn()
         {
-            _places[_currentPlayer] = GetNextPosition(_places[_currentPlayer], roll);
+            SetNextPosition(roll);
 
-            Console.WriteLine($"{_players[_currentPlayer]}'s new location is {_places[_currentPlayer]}");
+            Console.WriteLine($"{_players[_currentPlayer]}'s new location is {CurrentPlayer.Place}");
             Console.WriteLine($"The category is {CurrentCategory()}");
             AskQuestion();
         }
@@ -97,10 +95,10 @@ public class Game
                 _isGettingOutOfPenaltyBox = true;
 
                 Console.WriteLine($"{_players[_currentPlayer]} is getting out of the penalty box");
-                _places[_currentPlayer] = _places[_currentPlayer] + roll;
-                if (_places[_currentPlayer] > 11) _places[_currentPlayer] = _places[_currentPlayer] - 12;
+                
+                SetNextPosition(roll);
 
-                Console.WriteLine($"{_players[_currentPlayer]}'s new location is {_places[_currentPlayer]}");
+                Console.WriteLine($"{_players[_currentPlayer]}'s new location is {CurrentPlayer.Place}");
                 Console.WriteLine($"The category is {CurrentCategory()}");
                 AskQuestion();
             }
@@ -112,12 +110,10 @@ public class Game
         }
     }
 
-    private int GetNextPosition(int current, int roll)
+    private void SetNextPosition(int roll)
     {
-        var sum = current + roll;
-        if (sum > 11)
-            return sum - 12;
-        return sum;
+        var sum = CurrentPlayer.Place + roll;
+        CurrentPlayer.Place = sum > 11 ? sum - 12 : sum;
     }
 
     private void AskQuestion()
@@ -149,11 +145,11 @@ public class Game
 
     private Category CurrentCategory()
     {
-        if (_places[_currentPlayer] is 0 or 4 or 8)
+        if (CurrentPlayer.Place is 0 or 4 or 8)
             return Category.Pop;
-        if (_places[_currentPlayer] is 1 or 5 or 9)
+        if (CurrentPlayer.Place is 1 or 5 or 9)
             return Category.Science;
-        if (_places[_currentPlayer] is 2 or 6 or 10)
+        if (CurrentPlayer.Place is 2 or 6 or 10)
             return Category.Sports;
         return Category.Rock;
     }
