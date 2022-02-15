@@ -81,12 +81,16 @@ public class Game
         }
         else
         {
-            _places[_currentPlayer] = _places[_currentPlayer] + roll;
-            if (_places[_currentPlayer] > 11) _places[_currentPlayer] = _places[_currentPlayer] - 12;
+            NormalTurn();
+        }
 
-            Console.WriteLine(_players[_currentPlayer]
-                              + "'s new location is "
-                              + _places[_currentPlayer]);
+        void NormalTurn()
+        {
+            _places[_currentPlayer] = _places[_currentPlayer] + roll;
+            if (_places[_currentPlayer] > 11)
+                _places[_currentPlayer] = _places[_currentPlayer] - 12;
+
+            Console.WriteLine($"{_players[_currentPlayer]}'s new location is {_places[_currentPlayer]}");
             Console.WriteLine($"The category is {CurrentCategory()}");
             AskQuestion();
         }
