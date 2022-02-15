@@ -8,8 +8,10 @@ namespace Tests;
 
 public class SnapshotTest
 {
-    [Fact(DisplayName = "produces the same output")]
-    public void Test1()
+    [Theory(DisplayName = "produces the same output")]
+    [InlineData(0)]
+    [InlineData(1)]
+    public void Test1(int index)
     {
         using var stringWriter = new StringWriter();
         Console.SetOut(stringWriter);
@@ -19,7 +21,7 @@ public class SnapshotTest
         aGame.Add("Pat");
         aGame.Add("Sue");
 
-        var (snapshot, plays) = GetGame(0);
+        var (snapshot, plays) = GetGame(index);
 
         foreach (var (roll, isCorrect) in plays)
         {

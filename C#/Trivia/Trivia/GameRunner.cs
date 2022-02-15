@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Trivia
 {
@@ -16,11 +17,15 @@ namespace Trivia
 
             var rand = new Random();
 
+            var plays = new List<string>();
+
             do
             {
-                aGame.Roll(rand.Next(5) + 1);
+                var roll = rand.Next(5) + 1;
+                aGame.Roll(roll);
 
-                if (rand.Next(9) == 7)
+                var isFail = rand.Next(9) == 7;
+                if (isFail)
                 {
                     _notAWinner = aGame.WrongAnswer();
                 }
@@ -28,7 +33,13 @@ namespace Trivia
                 {
                     _notAWinner = aGame.WasCorrectlyAnswered();
                 }
+                plays.Add($"{roll},{!isFail}");
             } while (_notAWinner);
+
+            foreach (var play in plays)
+            {
+                Console.WriteLine(play);
+            }
         }
     }
 }
