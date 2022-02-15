@@ -16,17 +16,24 @@ public class Game {
 
     int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
-
+    
+    enum Category {
+        Pop,
+        Science,
+        Sports,
+        Rock
+    }
+    
     public Game() {
         for (int i = 0; i < 50; i++) {
-            popQuestions.addLast(createQuestion("Pop",  i));
-            scienceQuestions.addLast(createQuestion("Science",  i));
-            sportsQuestions.addLast(createQuestion("Sports",  i));
-            rockQuestions.addLast(createQuestion("Rock",  i));
+            popQuestions.addLast(createQuestion(Category.Pop,  i));
+            scienceQuestions.addLast(createQuestion(Category.Science,  i));
+            sportsQuestions.addLast(createQuestion(Category.Sports,  i));
+            rockQuestions.addLast(createQuestion(Category.Rock,  i));
         }
     }
 
-    public String createQuestion(String questionType, int index) {
+    public String createQuestion(Category questionType, int index) {
         return questionType + " Question " + index;
     }
 
@@ -87,28 +94,28 @@ public class Game {
     }
 
     private void askQuestion() {
-        if (currentCategory().equals("Pop"))
+        if (currentCategory().equals(Category.Pop))
             System.out.println(popQuestions.removeFirst());
-        if (currentCategory().equals("Science"))
+        if (currentCategory().equals(Category.Science))
             System.out.println(scienceQuestions.removeFirst());
-        if (currentCategory().equals("Sports"))
+        if (currentCategory().equals(Category.Sports))
             System.out.println(sportsQuestions.removeFirst());
-        if (currentCategory().equals("Rock"))
+        if (currentCategory().equals(Category.Rock))
             System.out.println(rockQuestions.removeFirst());
     }
 
 
-    private String currentCategory() {
-        if (places[currentPlayer] == 0) return "Pop";
-        if (places[currentPlayer] == 4) return "Pop";
-        if (places[currentPlayer] == 8) return "Pop";
-        if (places[currentPlayer] == 1) return "Science";
-        if (places[currentPlayer] == 5) return "Science";
-        if (places[currentPlayer] == 9) return "Science";
-        if (places[currentPlayer] == 2) return "Sports";
-        if (places[currentPlayer] == 6) return "Sports";
-        if (places[currentPlayer] == 10) return "Sports";
-        return "Rock";
+    private Category currentCategory() {
+        if (places[currentPlayer] == 0) return Category.Pop;
+        if (places[currentPlayer] == 4) return Category.Pop;
+        if (places[currentPlayer] == 8) return Category.Pop;
+        if (places[currentPlayer] == 1) return Category.Science;
+        if (places[currentPlayer] == 5) return Category.Science;
+        if (places[currentPlayer] == 9) return Category.Science;
+        if (places[currentPlayer] == 2) return Category.Sports;
+        if (places[currentPlayer] == 6) return Category.Sports;
+        if (places[currentPlayer] == 10) return Category.Sports;
+        return Category.Rock;
     }
 
     public boolean wasCorrectlyAnswered() {
