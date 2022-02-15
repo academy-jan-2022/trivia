@@ -17,18 +17,19 @@ public class Player
 
 public enum PenaltyBoxState
 {
-    In,
-    Out,
-    Leaving
+    In = 1,
+    Out = 0,
+    Leaving = 2
 }
 
 public class Game
 {
     private readonly bool[] _inPenaltyBox = new bool[6];
-    private readonly int[] _purses = new int[6];
     private readonly int[] _places = new int[6];
     private bool _isGettingOutOfPenaltyBox;
     private int _currentPlayer;
+
+    private Player CurrentPlayer => players[_currentPlayer];
 
     private readonly List<Player> players = new();
     private readonly List<string> _players = new();
@@ -61,7 +62,6 @@ public class Game
         players.Add(new Player(playerName));
         _players.Add(playerName);
         _places[HowManyPlayers()] = 0;
-        _purses[HowManyPlayers()] = 0;
         _inPenaltyBox[HowManyPlayers()] = false;
 
         Console.WriteLine($"{playerName} was added");
@@ -165,8 +165,8 @@ public class Game
             if (_isGettingOutOfPenaltyBox)
             {
                 Console.WriteLine("Answer was correct!!!!");
-                _purses[_currentPlayer]++;
-                Console.WriteLine($"{_players[_currentPlayer]} now has {_purses[_currentPlayer]} Gold Coins.");
+                CurrentPlayer.Purse++;
+                Console.WriteLine($"{_players[_currentPlayer]} now has {CurrentPlayer.Purse} Gold Coins.");
 
                 var winner = DidPlayerWin();
                 SetNextPlayer();
@@ -180,8 +180,8 @@ public class Game
 
         {
             Console.WriteLine("Answer was corrent!!!!");
-            _purses[_currentPlayer]++;
-            Console.WriteLine($"{_players[_currentPlayer]} now has {_purses[_currentPlayer]} Gold Coins.");
+            CurrentPlayer.Purse++;
+            Console.WriteLine($"{_players[_currentPlayer]} now has {CurrentPlayer.Purse} Gold Coins.");
 
             var winner = DidPlayerWin();
             SetNextPlayer();
@@ -205,7 +205,7 @@ public class Game
 
 
     private bool DidPlayerWin() =>
-        _purses[_currentPlayer] != 6;
+        CurrentPlayer.Purse != 6;
 }
 
 public enum Category
