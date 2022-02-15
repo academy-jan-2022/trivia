@@ -20,56 +20,56 @@ They have rolled a 3
 Chet's new location is 3
 The category is Rock
 Rock Question 0
-Answer was corrent!!!!        *
+Answer was corrent!!!!
 Chet now has 1 Gold Coins.
 Pat is the current player
 They have rolled a 3
 Pat's new location is 3
 The category is Rock
 Rock Question 1
-Answer was corrent!!!!        *
+Answer was corrent!!!!
 Pat now has 1 Gold Coins.
 Sue is the current player
 They have rolled a 3
 Sue's new location is 3
 The category is Rock
 Rock Question 2
-Answer was corrent!!!!        *
+Answer was corrent!!!!
 Sue now has 1 Gold Coins.
 Chet is the current player
 They have rolled a 3
 Chet's new location is 6
 The category is Sports
 Sports Question 0
-Answer was corrent!!!!        *
+Answer was corrent!!!!
 Chet now has 2 Gold Coins.
 Pat is the current player
 They have rolled a 4
 Pat's new location is 7
 The category is Rock
 Rock Question 3
-Answer was corrent!!!!        *
+Answer was corrent!!!!
 Pat now has 2 Gold Coins.
 Sue is the current player
 They have rolled a 2
 Sue's new location is 5
 The category is Science
 Science Question 0
-Answer was corrent!!!!        *
+Answer was corrent!!!!
 Sue now has 2 Gold Coins.
 Chet is the current player
 They have rolled a 4
 Chet's new location is 10
 The category is Sports
 Sports Question 1
-Answer was corrent!!!!        *
+Answer was corrent!!!!
 Chet now has 3 Gold Coins.
 Pat is the current player
 They have rolled a 5
 Pat's new location is 0
 The category is Pop
 Pop Question 0
-Answer was corrent!!!!        *
+Answer was corrent!!!!
 Pat now has 3 Gold Coins.
 Sue is the current player
 They have rolled a 4
@@ -152,6 +152,15 @@ Pat now has 6 Gold Coins.
             new(2, true),
             new(4, true),
             new(5, true),
+            new(4, true),
+            new(5, true),
+            new(1, true),
+            new(5, true),
+            new(2, false),
+            new(3, true),
+            new(5, true),
+            new(2, true),
+            new(4, true)
         };
 
         foreach (var (roll, isCorrect) in plays)
