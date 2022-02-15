@@ -11,13 +11,6 @@ public class SnapshotTest
     [Fact(DisplayName = "produces the same output")]
     public void Test1()
     {
-        var snapshot =
-            string.Join(
-                "\r\n",
-                File
-                    .ReadAllLines("./Snapshots/0/output.txt")
-            ) + "\r\n";
-
         using var stringWriter = new StringWriter();
         Console.SetOut(stringWriter);
 
@@ -26,13 +19,7 @@ public class SnapshotTest
         aGame.Add("Pat");
         aGame.Add("Sue");
 
-        var playLines = File.ReadAllLines("./Snapshots/0/plays.csv");
-        var plays = new List<Play>();
-        foreach (var playLine in playLines)
-        {
-            var parts = playLine.Split(",");
-            plays.Add(new Play(int.Parse(parts[0]), bool.Parse(parts[1])));
-        }
+        var (snapshot, plays) = GetGame(0);
 
         foreach (var (roll, isCorrect) in plays)
         {
@@ -43,6 +30,27 @@ public class SnapshotTest
                 aGame.WrongAnswer();
         }
         Assert.Equal(snapshot, stringWriter.ToString());
+    }
+
+    private (string snapshot, List<Play> plays) GetGame(int index)
+    {
+        var snapshotFileName = $"./Snapshots/{index}/output.txt";
+        var playsFileName = $"./Snapshots/{index}/plays.csv";
+        var snapshot =
+            string.Join(
+                "\r\n",
+                File
+                    .ReadAllLines(snapshotFileName)
+            ) + "\r\n";
+        var playLines = File.ReadAllLines(playsFileName);
+        var plays = new List<Play>();
+        foreach (var playLine in playLines)
+        {
+            var parts = playLine.Split(",");
+            plays.Add(new Play(int.Parse(parts[0]), bool.Parse(parts[1])));
+        }
+
+        return (snapshot, plays);
     }
 }
 
