@@ -77,7 +77,7 @@ public class Game {
 
     private void regularTurn(int roll) {
         setPlayerPlace(roll);
-        setCategory(currentPlayer.getPlace());
+        setCategory();
 
         System.out.println(currentPlayer.getName()
                 + "'s new location is "
@@ -86,7 +86,7 @@ public class Game {
         askQuestion();
     }
 
-    private void setCategory(int place) {
+    private void setCategory() {
         if (isPopCategory()){
             myCurrentCategory = pop;
             return;
@@ -109,21 +109,6 @@ public class Game {
         System.out.println(myCurrentCategory.getNextQuestion());
     }
 
-    private CategoryName currentCategory() {
-        if (isPopCategory()){
-            return CategoryName.Pop;
-        }
-
-        if (isScienceCategory()){
-            return CategoryName.Science;
-        }
-
-        if (isSportsCategory()){
-            return CategoryName.Sports;
-        }
-
-        return CategoryName.Rock;
-    }
 
     private boolean isPopCategory() {
         int currentPosition = currentPlayer.getPlace();
