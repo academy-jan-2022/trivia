@@ -15,7 +15,6 @@ public class Game {
     LinkedList<String> rockQuestions = new LinkedList<>();
 
     int currentPlayer = 0;
-    boolean isGettingOutOfPenaltyBox;
     
     enum Category {
         Pop,
@@ -72,14 +71,12 @@ public class Game {
     private void penaltyBoxTurn(int roll) {
         boolean shouldGetOutOfPenaltyBox = roll % 2 != 0;
         if (shouldGetOutOfPenaltyBox) {
-            isGettingOutOfPenaltyBox = true;
-
             System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
+			inPenaltyBox[currentPlayer] = false;
             regularTurn(roll);
 
         } else {
             System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
-            isGettingOutOfPenaltyBox = false;
         }
     }
 
@@ -139,17 +136,6 @@ public class Game {
     }
 
     public boolean wasCorrectlyAnswered() {
-        if (isGettingOutOfPenaltyBox) {
-            purses[currentPlayer]++;
-
-            boolean winner = didPlayerWin();
-
-            renderMessageOnCorrectAnswer();
-            setNextPlayer();
-
-            return winner;
-        }
-
         if (inPenaltyBox[currentPlayer]) {
             setNextPlayer();
             return true;
