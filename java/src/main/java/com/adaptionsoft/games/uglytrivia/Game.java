@@ -3,10 +3,7 @@ package com.adaptionsoft.games.uglytrivia;
 import java.util.ArrayList;
 
 public class Game {
-    private final Category pop;
-    private final Category science;
-    private final Category sports;
-    private final Category rock;
+    private final ArrayList<Category> categories = new ArrayList<>();
 
     ArrayList<Player> players = new ArrayList<>();
 
@@ -15,10 +12,10 @@ public class Game {
     private Category myCurrentCategory;
 
     public Game() {
-        pop = new PopCategory(new int[]{0, 4, 8});
-        science = new ScienceCategory(new int[]{1, 5, 9});
-        sports = new SportsCategory(new int[]{2, 6, 10});
-        rock = new RockCategory(new int[]{3, 7, 11});
+        categories.add(new PopCategory(new int[]{0, 4, 8}));
+        categories.add(new ScienceCategory(new int[]{1, 5, 9}));
+        categories.add(new SportsCategory(new int[]{2, 6, 10}));
+        categories.add(new RockCategory(new int[]{3, 7, 11}));
     }
 
     public boolean add(String playerName) {
@@ -29,7 +26,7 @@ public class Game {
         }
 
         System.out.println(playerName + " was added");
-        System.out.println("They are player number " + players.size());
+        System.out.println("They are player number " + howManyPlayers());
         return true;
     }
 
@@ -77,42 +74,16 @@ public class Game {
     }
 
     private void setCategory() {
-        if (isPopCategory()){
-            myCurrentCategory = pop;
-            return;
+        for (Category category: categories) {
+            if(category.shouldBeCurrent(currentPlayer.getPlace())){
+                myCurrentCategory = category;
+                break;
+            }
         }
-
-        if (isScienceCategory()){
-            myCurrentCategory = science;
-            return;
-        }
-
-        if (isSportsCategory()){
-            myCurrentCategory = sports;
-            return;
-        }
-
-        myCurrentCategory = rock;
     }
 
     private void askQuestion() {
         System.out.println(myCurrentCategory.getNextQuestion());
-    }
-
-
-    private boolean isPopCategory() {
-        int currentPosition = currentPlayer.getPlace();
-        return currentPosition == 0 || currentPosition == 4 || currentPosition == 8;
-    }
-
-    private boolean isScienceCategory() {
-        int currentPosition = currentPlayer.getPlace();
-        return currentPosition == 1 || currentPosition == 5 || currentPosition == 9;
-    }
-
-    private boolean isSportsCategory() {
-        int currentPosition = currentPlayer.getPlace();
-        return currentPosition == 2 || currentPosition == 6 || currentPosition == 10;
     }
 
     public boolean wasCorrectlyAnswered() {
@@ -133,7 +104,7 @@ public class Game {
 
     private void setNextPlayer() {
         currentPlayerIndex++;
-        if (currentPlayerIndex == players.size())
+        if (currentPlayerIndex == howManyPlayers())
             currentPlayerIndex = 0;
         currentPlayer = players.get(currentPlayerIndex);
     }

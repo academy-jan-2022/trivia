@@ -1,5 +1,6 @@
 package com.adaptionsoft.games.uglytrivia;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 
 public class ScienceCategory implements Category {
@@ -27,5 +28,10 @@ public class ScienceCategory implements Category {
     public String getName(){
 
         return name.getValue();
+    }
+
+    @Override
+    public boolean shouldBeCurrent(int place) {
+        return Arrays.stream(positions).anyMatch(position -> position == place);
     }
 }
