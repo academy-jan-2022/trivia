@@ -1,7 +1,6 @@
 package com.adaptionsoft.games.uglytrivia;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class Game {
     private final Category pop;
@@ -16,15 +15,15 @@ public class Game {
     private Category myCurrentCategory;
 
     public Game() {
-        pop = new Category(Category.CategoryName.Pop);
-        science = new Category(Category.CategoryName.Science);
-        sports = new Category(Category.CategoryName.Sports);
-        rock = new Category(Category.CategoryName.Rock);
+        pop = new Category(CategoryName.Pop);
+        science = new Category(CategoryName.Science);
+        sports = new Category(CategoryName.Sports);
+        rock = new Category(CategoryName.Rock);
 
-        pop.createQuestion(Category.CategoryName.Pop);
-        science.createQuestion(Category.CategoryName.Science);
-        sports.createQuestion(Category.CategoryName.Sports);
-        rock.createQuestion(Category.CategoryName.Rock);
+        pop.createQuestions();
+        science.createQuestions();
+        sports.createQuestions();
+        rock.createQuestions();
     }
 
 
@@ -110,20 +109,20 @@ public class Game {
         System.out.println(myCurrentCategory.getNextQuestion());
     }
 
-    private Category.CategoryName currentCategory() {
+    private CategoryName currentCategory() {
         if (isPopCategory()){
-            return Category.CategoryName.Pop;
+            return CategoryName.Pop;
         }
 
         if (isScienceCategory()){
-            return Category.CategoryName.Science;
+            return CategoryName.Science;
         }
 
         if (isSportsCategory()){
-            return Category.CategoryName.Sports;
+            return CategoryName.Sports;
         }
 
-        return Category.CategoryName.Rock;
+        return CategoryName.Rock;
     }
 
     private boolean isPopCategory() {
@@ -184,4 +183,6 @@ public class Game {
     private boolean didPlayerWin() {
         return !(currentPlayer.getPurse() == 6);
     }
+
+
 }

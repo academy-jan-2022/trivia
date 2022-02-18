@@ -15,17 +15,10 @@ public class Category {
         return categoryQuestions.removeFirst();
     }
 
-    enum CategoryName {
-        Pop,
-        Science,
-        Sports,
-        Rock
-    }
-
-    public void createQuestion(CategoryName category) {
+    public void createQuestions() {
 
         for (int i = 0; i < 50; i++) {
-            String question = category + " Question " + i;
+            String question = categoryType + " Question " + i;
             categoryQuestions.addLast(question);
         }
     }
