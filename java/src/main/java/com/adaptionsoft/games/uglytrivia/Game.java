@@ -3,22 +3,22 @@ package com.adaptionsoft.games.uglytrivia;
 import java.util.ArrayList;
 
 public class Game {
-    private final Category pop;
-    private final Category science;
-    private final Category sports;
-    private final Category rock;
+    private final ICategory pop;
+    private final ICategory science;
+    private final ICategory sports;
+    private final ICategory rock;
 
     ArrayList<Player> players = new ArrayList<>();
 
     int currentPlayerIndex = 0;
     private Player currentPlayer;
-    private Category myCurrentCategory;
+    private ICategory myCurrentCategory;
 
     public Game() {
-        pop = new Category(CategoryName.POP);
-        science = new Category(CategoryName.SCIENCE);
-        sports = new Category(CategoryName.SPORTS);
-        rock = new Category(CategoryName.ROCK);
+        pop = new PopCategory();
+        science = new ScienceCategory();
+        sports = new SportsCategory();
+        rock = new RockCategory();
 
         pop.createQuestions();
         science.createQuestions();
