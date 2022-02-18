@@ -13,11 +13,11 @@ public class Category {
         Rock
     }
 
-    public String createQuestion(CategoryName category, int index) {
-        String question = category + " Question " + index;
+    public void createQuestion(CategoryName category) {
 
-        categoryQuestions.addLast(question);
-
-        return question;
+        for (int i = 0; i < 50; i++) {
+            String question = category + " Question " + i;
+            categoryQuestions.addLast(question);
+        }
     }
 }

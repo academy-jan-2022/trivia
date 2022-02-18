@@ -20,12 +20,10 @@ public class Game {
         sports = new Category();
         rock = new Category();
 
-        for (int i = 0; i < 50; i++) {
-            pop.createQuestion(Category.CategoryName.Pop,  i);
-            science.createQuestion(Category.CategoryName.Science,  i);
-            sports.createQuestion(Category.CategoryName.Sports,  i);
-            rock.createQuestion(Category.CategoryName.Rock,  i);
-        }
+        pop.createQuestion(Category.CategoryName.Pop);
+        science.createQuestion(Category.CategoryName.Science);
+        sports.createQuestion(Category.CategoryName.Sports);
+        rock.createQuestion(Category.CategoryName.Rock);
     }
 
 
