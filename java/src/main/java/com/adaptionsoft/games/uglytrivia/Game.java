@@ -4,22 +4,27 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Game {
-    ArrayList<Player> players = new ArrayList<>();
+    private final Category pop;
+    private final Category science;
+    private final Category sports;
+    private final Category rock;
 
-    LinkedList<String> popQuestions = new LinkedList<>();
-    LinkedList<String> scienceQuestions = new LinkedList<>();
-    LinkedList<String> sportsQuestions = new LinkedList<>();
-    LinkedList<String> rockQuestions = new LinkedList<>();
+    ArrayList<Player> players = new ArrayList<>();
 
     int currentPlayerIndex = 0;
     private Player currentPlayer;
 
     public Game() {
+        pop = new Category();
+        science = new Category();
+        sports = new Category();
+        rock = new Category();
+
         for (int i = 0; i < 50; i++) {
-            popQuestions.addLast(new Category().createQuestion(Category.CategoryName.Pop,  i));
-            scienceQuestions.addLast(new Category().createQuestion(Category.CategoryName.Science,  i));
-            sportsQuestions.addLast(new Category().createQuestion(Category.CategoryName.Sports,  i));
-            rockQuestions.addLast(new Category().createQuestion(Category.CategoryName.Rock,  i));
+            pop.createQuestion(Category.CategoryName.Pop,  i);
+            science.createQuestion(Category.CategoryName.Science,  i);
+            sports.createQuestion(Category.CategoryName.Sports,  i);
+            rock.createQuestion(Category.CategoryName.Rock,  i);
         }
     }
 
@@ -84,13 +89,13 @@ public class Game {
 
     private void askQuestion() {
         if (currentCategory().equals(Category.CategoryName.Pop))
-            System.out.println(popQuestions.removeFirst());
+            System.out.println(pop.categoryQuestions.removeFirst());
         if (currentCategory().equals(Category.CategoryName.Science))
-            System.out.println(scienceQuestions.removeFirst());
+            System.out.println(science.categoryQuestions.removeFirst());
         if (currentCategory().equals(Category.CategoryName.Sports))
-            System.out.println(sportsQuestions.removeFirst());
+            System.out.println(sports.categoryQuestions.removeFirst());
         if (currentCategory().equals(Category.CategoryName.Rock))
-            System.out.println(rockQuestions.removeFirst());
+            System.out.println(rock.categoryQuestions.removeFirst());
     }
 
     private Category.CategoryName currentCategory() {

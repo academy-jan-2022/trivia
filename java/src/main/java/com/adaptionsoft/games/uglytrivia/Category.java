@@ -1,6 +1,10 @@
 package com.adaptionsoft.games.uglytrivia;
 
+import java.util.LinkedList;
+
 public class Category {
+
+    public LinkedList<String> categoryQuestions = new LinkedList<>();
 
     enum CategoryName {
         Pop,
@@ -10,6 +14,10 @@ public class Category {
     }
 
     public String createQuestion(CategoryName category, int index) {
-        return category + " Question " + index;
+        String question = category + " Question " + index;
+
+        categoryQuestions.addLast(question);
+
+        return question;
     }
 }
