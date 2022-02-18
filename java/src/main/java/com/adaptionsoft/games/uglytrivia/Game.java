@@ -16,16 +16,13 @@ public class Game {
 
     public Game() {
         for (int i = 0; i < 50; i++) {
-            popQuestions.addLast(createQuestion(Category.CategoryName.Pop,  i));
-            scienceQuestions.addLast(createQuestion(Category.CategoryName.Science,  i));
-            sportsQuestions.addLast(createQuestion(Category.CategoryName.Sports,  i));
-            rockQuestions.addLast(createQuestion(Category.CategoryName.Rock,  i));
+            popQuestions.addLast(new Category().createQuestion(Category.CategoryName.Pop,  i));
+            scienceQuestions.addLast(new Category().createQuestion(Category.CategoryName.Science,  i));
+            sportsQuestions.addLast(new Category().createQuestion(Category.CategoryName.Sports,  i));
+            rockQuestions.addLast(new Category().createQuestion(Category.CategoryName.Rock,  i));
         }
     }
 
-    public String createQuestion(Category.CategoryName questionType, int index) {
-        return questionType + " Question " + index;
-    }
 
     public boolean isPlayable() {
         return (howManyPlayers() >= 2);

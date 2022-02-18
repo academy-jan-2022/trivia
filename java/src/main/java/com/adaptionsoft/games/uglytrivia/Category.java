@@ -8,4 +8,8 @@ public class Category {
         Sports,
         Rock
     }
+
+    public String createQuestion(CategoryName category, int index) {
+        return category + " Question " + index;
+    }
 }
