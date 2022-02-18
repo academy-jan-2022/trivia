@@ -15,10 +15,10 @@ public class Game {
     private Category myCurrentCategory;
 
     public Game() {
-        pop = new Category(CategoryName.Pop);
-        science = new Category(CategoryName.Science);
-        sports = new Category(CategoryName.Sports);
-        rock = new Category(CategoryName.Rock);
+        pop = new Category(CategoryName.POP);
+        science = new Category(CategoryName.SCIENCE);
+        sports = new Category(CategoryName.SPORTS);
+        rock = new Category(CategoryName.ROCK);
 
         pop.createQuestions();
         science.createQuestions();

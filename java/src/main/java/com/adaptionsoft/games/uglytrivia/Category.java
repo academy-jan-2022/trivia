@@ -4,11 +4,12 @@ import java.util.LinkedList;
 
 public class Category {
 
-    public CategoryName categoryType;
+    public CategoryName name;
     private LinkedList<String> categoryQuestions = new LinkedList<>();
 
     public Category(CategoryName name) {
-        this.categoryType = name;
+
+        this.name = name;
     }
 
     public String getNextQuestion() {
@@ -18,12 +19,13 @@ public class Category {
     public void createQuestions() {
 
         for (int i = 0; i < 50; i++) {
-            String question = categoryType + " Question " + i;
+            String question = name.getValue() + " Question " + i;
             categoryQuestions.addLast(question);
         }
     }
 
     public String getName(){
-        return categoryType.name();
+
+        return name.getValue();
     }
 }
