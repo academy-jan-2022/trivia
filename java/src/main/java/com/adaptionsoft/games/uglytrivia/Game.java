@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Game {
-    ArrayList<String> players = new ArrayList<String>();
-    int[] places = new int[6];
-    int[] purses = new int[6];
-    boolean[] inPenaltyBox = new boolean[6];
+    ArrayList<Player> players = new ArrayList<>();
 
     LinkedList<String> popQuestions = new LinkedList<>();
     LinkedList<String> scienceQuestions = new LinkedList<>();
@@ -41,10 +38,7 @@ public class Game {
     }
 
     public boolean add(String playerName) {
-        players.add(playerName);
-        places[howManyPlayers()] = 0;
-        purses[howManyPlayers()] = 0;
-        inPenaltyBox[howManyPlayers()] = false;
+        players.add(new Player(playerName));
 
         System.out.println(playerName + " was added");
         System.out.println("They are player number " + players.size());
@@ -59,7 +53,7 @@ public class Game {
         System.out.println(players.get(currentPlayer) + " is the current player");
         System.out.println("They have rolled a " + roll);
 
-        if (inPenaltyBox[currentPlayer]) {
+        if (players.get(currentPlayer).isInPenaltyBox()) {
             penaltyBoxTurn(roll);
 
         } else {
@@ -72,7 +66,7 @@ public class Game {
         boolean shouldGetOutOfPenaltyBox = roll % 2 != 0;
         if (shouldGetOutOfPenaltyBox) {
             System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
-			inPenaltyBox[currentPlayer] = false;
+            players.get(currentPlayer).setInPenaltyBox(false);
             regularTurn(roll);
 
         } else {
@@ -105,7 +99,6 @@ public class Game {
         if (currentCategory().equals(Category.Rock))
             System.out.println(rockQuestions.removeFirst());
     }
-
 
     private Category currentCategory() {
         if (isPopCategory()){

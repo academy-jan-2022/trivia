@@ -31,16 +31,12 @@ public class GameRunner {
 
 			aGame.roll(roll);
 
-
-
 			if (isIncorrect) {
 				notAWinner = aGame.wrongAnswer();
 			} else {
 				notAWinner = aGame.wasCorrectlyAnswered();
 			}
-			
-			
-			
+
 		} while (notAWinner);
 
 		for(Play play: plays){
