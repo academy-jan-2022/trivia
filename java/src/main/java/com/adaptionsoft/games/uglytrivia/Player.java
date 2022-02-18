@@ -26,16 +26,16 @@ public class Player {
         return purse;
     }
 
-    public void setPurse(int purse) {
-        this.purse = purse;
-    }
-
     public int getPlace() {
         return place;
     }
 
-    public void setPlace(int place) {
-        this.place = place;
+    public void setPlace(int roll) {
+        place = place + roll;
+
+        if (place > 11)
+            place = place - 12;
+
     }
 
     public boolean isInPenaltyBox() {
@@ -44,5 +44,9 @@ public class Player {
 
     public void setInPenaltyBox(boolean inPenaltyBox) {
         this.inPenaltyBox = inPenaltyBox;
+    }
+
+    public void addCoinToPurse() {
+        purse ++;
     }
 }
