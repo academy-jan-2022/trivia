@@ -13,12 +13,13 @@ public class Game {
 
     int currentPlayerIndex = 0;
     private Player currentPlayer;
+    private Category myCurrentCategory;
 
     public Game() {
-        pop = new Category();
-        science = new Category();
-        sports = new Category();
-        rock = new Category();
+        pop = new Category(Category.CategoryName.Pop);
+        science = new Category(Category.CategoryName.Science);
+        sports = new Category(Category.CategoryName.Sports);
+        rock = new Category(Category.CategoryName.Rock);
 
         pop.createQuestion(Category.CategoryName.Pop);
         science.createQuestion(Category.CategoryName.Science);
@@ -77,23 +78,36 @@ public class Game {
 
     private void regularTurn(int roll) {
         setPlayerPlace(roll);
+        setCategory(currentPlayer.getPlace());
 
         System.out.println(currentPlayer.getName()
                 + "'s new location is "
                 + currentPlayer.getPlace());
-        System.out.println("The category is " + currentCategory());
+        System.out.println("The category is " + myCurrentCategory.getName());
         askQuestion();
     }
 
+    private void setCategory(int place) {
+        if (isPopCategory()){
+            myCurrentCategory = pop;
+            return;
+        }
+
+        if (isScienceCategory()){
+            myCurrentCategory = science;
+            return;
+        }
+
+        if (isSportsCategory()){
+            myCurrentCategory = sports;
+            return;
+        }
+
+        myCurrentCategory = rock;
+    }
+
     private void askQuestion() {
-        if (currentCategory().equals(Category.CategoryName.Pop))
-            System.out.println(pop.getNextQuestion());
-        if (currentCategory().equals(Category.CategoryName.Science))
-            System.out.println(science.getNextQuestion());
-        if (currentCategory().equals(Category.CategoryName.Sports))
-            System.out.println(sports.getNextQuestion());
-        if (currentCategory().equals(Category.CategoryName.Rock))
-            System.out.println(rock.getNextQuestion());
+        System.out.println(myCurrentCategory.getNextQuestion());
     }
 
     private Category.CategoryName currentCategory() {

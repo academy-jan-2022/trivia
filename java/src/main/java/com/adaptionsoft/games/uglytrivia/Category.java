@@ -4,7 +4,12 @@ import java.util.LinkedList;
 
 public class Category {
 
+    public CategoryName categoryType;
     private LinkedList<String> categoryQuestions = new LinkedList<>();
+
+    public Category(CategoryName name) {
+        this.categoryType = name;
+    }
 
     public String getNextQuestion() {
         return categoryQuestions.removeFirst();
@@ -23,5 +28,9 @@ public class Category {
             String question = category + " Question " + i;
             categoryQuestions.addLast(question);
         }
+    }
+
+    public String getName(){
+        return categoryType.name();
     }
 }
