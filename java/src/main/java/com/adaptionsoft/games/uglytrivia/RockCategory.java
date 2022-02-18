@@ -4,10 +4,13 @@ import java.util.LinkedList;
 
 public class RockCategory implements Category {
 
+    private final int[] positions;
     public CategoryName name = CategoryName.ROCK;
     private final LinkedList<String> categoryQuestions = new LinkedList<>();
 
-    RockCategory(){
+    RockCategory(int[] positions){
+        this.positions = positions;
+        
         for (int i = 0; i < 50; i++) {
             String question = name.getValue() + " Question " + i;
             categoryQuestions.addLast(question);

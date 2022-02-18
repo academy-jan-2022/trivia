@@ -15,10 +15,10 @@ public class Game {
     private Category myCurrentCategory;
 
     public Game() {
-        pop = new PopCategory();
-        science = new ScienceCategory();
-        sports = new SportsCategory();
-        rock = new RockCategory();
+        pop = new PopCategory(new int[]{0, 4, 8});
+        science = new ScienceCategory(new int[]{1, 5, 9});
+        sports = new SportsCategory(new int[]{2, 6, 10});
+        rock = new RockCategory(new int[]{3, 7, 11});
     }
 
     public boolean add(String playerName) {

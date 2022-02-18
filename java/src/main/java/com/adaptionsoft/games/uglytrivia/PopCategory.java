@@ -6,8 +6,11 @@ public class PopCategory implements Category {
 
     public CategoryName name = CategoryName.POP;
     private final LinkedList<String> categoryQuestions = new LinkedList<>();
+    private final int[] positions;
 
-    PopCategory(){
+    PopCategory(int[] positions){
+        this.positions = positions;
+
         for (int i = 0; i < 50; i++) {
             String question = name.getValue() + " Question " + i;
             categoryQuestions.addLast(question);
@@ -21,7 +24,6 @@ public class PopCategory implements Category {
 
     @Override
     public String getName(){
-
         return name.getValue();
     }
 }
