@@ -139,21 +139,9 @@ public class Game {
     }
 
     public boolean wasCorrectlyAnswered() {
-        if (inPenaltyBox[currentPlayer]) {
-            if (isGettingOutOfPenaltyBox) {
-                purses[currentPlayer]++;
-                boolean winner = didPlayerWin();
-
-                renderMessageOnCorrectAnswer();
-                setNextPlayer();
-
-                return winner;
-            } else {
-                setNextPlayer();
-                return true;
-            }
-        } else {
+        if (isGettingOutOfPenaltyBox) {
             purses[currentPlayer]++;
+
             boolean winner = didPlayerWin();
 
             renderMessageOnCorrectAnswer();
@@ -161,6 +149,20 @@ public class Game {
 
             return winner;
         }
+
+        if (inPenaltyBox[currentPlayer]) {
+            setNextPlayer();
+            return true;
+        }
+
+        purses[currentPlayer]++;
+        boolean winner = didPlayerWin();
+
+        renderMessageOnCorrectAnswer();
+        setNextPlayer();
+
+        return winner;
+
     }
 
     private void setNextPlayer() {
