@@ -87,13 +87,13 @@ public class Game {
 
     private void askQuestion() {
         if (currentCategory().equals(Category.CategoryName.Pop))
-            System.out.println(pop.categoryQuestions.removeFirst());
+            System.out.println(pop.getNextQuestion());
         if (currentCategory().equals(Category.CategoryName.Science))
-            System.out.println(science.categoryQuestions.removeFirst());
+            System.out.println(science.getNextQuestion());
         if (currentCategory().equals(Category.CategoryName.Sports))
-            System.out.println(sports.categoryQuestions.removeFirst());
+            System.out.println(sports.getNextQuestion());
         if (currentCategory().equals(Category.CategoryName.Rock))
-            System.out.println(rock.categoryQuestions.removeFirst());
+            System.out.println(rock.getNextQuestion());
     }
 
     private Category.CategoryName currentCategory() {

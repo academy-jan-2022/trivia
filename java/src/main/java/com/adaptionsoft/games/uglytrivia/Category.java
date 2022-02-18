@@ -4,7 +4,11 @@ import java.util.LinkedList;
 
 public class Category {
 
-    public LinkedList<String> categoryQuestions = new LinkedList<>();
+    private LinkedList<String> categoryQuestions = new LinkedList<>();
+
+    public String getNextQuestion() {
+        return categoryQuestions.removeFirst();
+    }
 
     enum CategoryName {
         Pop,
