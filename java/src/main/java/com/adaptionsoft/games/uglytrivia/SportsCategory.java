@@ -30,7 +30,7 @@ public class SportsCategory implements Category {
     }
 
     @Override
-    public boolean shouldBeCurrent(int place) {
+    public boolean belongsTo(int place) {
         return Arrays.stream(positions).anyMatch(position -> position == place);
     }
 }

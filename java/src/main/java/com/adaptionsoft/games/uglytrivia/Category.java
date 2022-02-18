@@ -5,5 +5,5 @@ public interface Category {
 
     String getName();
 
-    boolean shouldBeCurrent(int place);
+    boolean belongsTo(int place);
 }

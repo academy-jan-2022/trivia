@@ -4,12 +4,10 @@ import java.util.ArrayList;
 
 public class Game {
     private final ArrayList<Category> categories = new ArrayList<>();
-
-    ArrayList<Player> players = new ArrayList<>();
-
-    int currentPlayerIndex = 0;
+    private final ArrayList<Player> players = new ArrayList<>();
     private Player currentPlayer;
-    private Category myCurrentCategory;
+    private Category currentCategory;
+    private int currentPlayerIndex = 0;
 
     public Game() {
         categories.add(new PopCategory(new int[]{0, 4, 8}));
@@ -64,26 +62,28 @@ public class Game {
 
     private void regularTurn(int roll) {
         setPlayerPlace(roll);
-        setCategory();
+        setCurrentCategory();
 
         System.out.println(currentPlayer.getName()
                 + "'s new location is "
                 + currentPlayer.getPlace());
-        System.out.println("The category is " + myCurrentCategory.getName());
+        System.out.println("The category is " + currentCategory.getName());
         askQuestion();
     }
 
-    private void setCategory() {
+    private void setCurrentCategory() {
         for (Category category: categories) {
-            if(category.shouldBeCurrent(currentPlayer.getPlace())){
-                myCurrentCategory = category;
+            boolean isPlayerOnCategoryPlace = category.belongsTo(currentPlayer.getPlace());
+
+            if(isPlayerOnCategoryPlace){
+                currentCategory = category;
                 break;
             }
         }
     }
 
     private void askQuestion() {
-        System.out.println(myCurrentCategory.getNextQuestion());
+        System.out.println(currentCategory.getNextQuestion());
     }
 
     public boolean wasCorrectlyAnswered() {
