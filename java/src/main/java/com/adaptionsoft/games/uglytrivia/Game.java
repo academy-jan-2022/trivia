@@ -14,23 +14,16 @@ public class Game {
     int currentPlayerIndex = 0;
     private Player currentPlayer;
 
-    enum Category {
-        Pop,
-        Science,
-        Sports,
-        Rock
-    }
-    
     public Game() {
         for (int i = 0; i < 50; i++) {
-            popQuestions.addLast(createQuestion(Category.Pop,  i));
-            scienceQuestions.addLast(createQuestion(Category.Science,  i));
-            sportsQuestions.addLast(createQuestion(Category.Sports,  i));
-            rockQuestions.addLast(createQuestion(Category.Rock,  i));
+            popQuestions.addLast(createQuestion(Category.CategoryName.Pop,  i));
+            scienceQuestions.addLast(createQuestion(Category.CategoryName.Science,  i));
+            sportsQuestions.addLast(createQuestion(Category.CategoryName.Sports,  i));
+            rockQuestions.addLast(createQuestion(Category.CategoryName.Rock,  i));
         }
     }
 
-    public String createQuestion(Category questionType, int index) {
+    public String createQuestion(Category.CategoryName questionType, int index) {
         return questionType + " Question " + index;
     }
 
@@ -60,7 +53,6 @@ public class Game {
 
         if (currentPlayer.isInPenaltyBox()) {
             penaltyBoxTurn(roll);
-
         } else {
             regularTurn(roll);
         }
@@ -94,30 +86,30 @@ public class Game {
     }
 
     private void askQuestion() {
-        if (currentCategory().equals(Category.Pop))
+        if (currentCategory().equals(Category.CategoryName.Pop))
             System.out.println(popQuestions.removeFirst());
-        if (currentCategory().equals(Category.Science))
+        if (currentCategory().equals(Category.CategoryName.Science))
             System.out.println(scienceQuestions.removeFirst());
-        if (currentCategory().equals(Category.Sports))
+        if (currentCategory().equals(Category.CategoryName.Sports))
             System.out.println(sportsQuestions.removeFirst());
-        if (currentCategory().equals(Category.Rock))
+        if (currentCategory().equals(Category.CategoryName.Rock))
             System.out.println(rockQuestions.removeFirst());
     }
 
-    private Category currentCategory() {
+    private Category.CategoryName currentCategory() {
         if (isPopCategory()){
-            return Category.Pop;
+            return Category.CategoryName.Pop;
         }
 
         if (isScienceCategory()){
-            return Category.Science;
+            return Category.CategoryName.Science;
         }
 
         if (isSportsCategory()){
-            return Category.Sports;
+            return Category.CategoryName.Sports;
         }
 
-        return Category.Rock;
+        return Category.CategoryName.Rock;
     }
 
     private boolean isPopCategory() {
@@ -174,7 +166,6 @@ public class Game {
         setNextPlayer();
         return true;
     }
-
 
     private boolean didPlayerWin() {
         return !(currentPlayer.getPurse() == 6);
